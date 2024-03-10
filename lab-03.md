@@ -25,23 +25,58 @@ nobel <- read_csv("data/nobel.csv")
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+nrow(nobel)
+```
+
+    ## [1] 935
+
+``` r
+ncol(nobel)
+```
+
+    ## [1] 26
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+library(tidyverse)
+nobel_living <- nobel %>% 
+  filter(is.na(died_date),
+         !is.na(country),
+         gender !="org")
+
+#write.csv(nobel_living, "nobel_living2.csv", row.names = FALSE) 
+```
+
+you are left with a data frame with 228 observations.
+
+``` r
+library(dplyr)
+library(tidyverse)
+nobel_living<-nobel_living %>% 
+  mutate(country_us = if_else(country == "USA","USA","other"))
+nobel_living_science<-nobel_living %>% 
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+``` r
+# 创建分面柱状图
+# 使用ggplot2创建可视化
+ggplot(nobel_living_science, aes(x = category, fill = country_us)) +
+  geom_bar(position = "dodge") + # 使用"dodge"位置调整来并排显示条形
+  facet_wrap(~ category) + # 按类别分面
+  coord_flip() + # 翻转坐标，使条形呈水平方向
+  labs(title = "Nobel Prize Laureates by Category and Country",
+       x = "Category",
+       y = "Count",
+       fill = "Laureate Location") +
+  theme_minimal()
+```
 
-### Exercise 4
+![](lab-03_files/figure-gfm/exercise-3-1.png)<!-- --> \### Exercise 4
 
 …
 
