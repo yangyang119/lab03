@@ -1,13 +1,21 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Yang
+2024.03.10
 
 ### Load packages and data
 
 ``` r
 library(tidyverse) 
 ```
+
+    ## Warning: package 'tidyverse' was built under R version 4.3.3
+
+    ## Warning: package 'readr' was built under R version 4.3.3
+
+    ## Warning: package 'forcats' was built under R version 4.3.3
+
+    ## Warning: package 'lubridate' was built under R version 4.3.3
 
 ``` r
 nobel <- read_csv("data/nobel.csv")
